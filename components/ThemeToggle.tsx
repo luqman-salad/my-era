@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
-import { Sun, Moon, Monitor } from 'lucide-react';
+import { Sun, Moon } from 'lucide-react';
 
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme();
@@ -10,6 +10,7 @@ export default function ThemeToggle() {
 
   // Prevent hydration mismatch
   useEffect(() => setMounted(true), []);
+  
   if (!mounted) return null;
 
   return (
@@ -27,19 +28,6 @@ export default function ThemeToggle() {
           title="Light Mode"
         >
           <Sun size={16} />
-        </button>
-
-        {/* System Mode */}
-        <button
-          onClick={() => setTheme('system')}
-          className={`p-2 rounded-full transition-all ${
-            theme === 'system' 
-            ? 'bg-[#137fec] text-white shadow-lg shadow-[#137fec]/20' 
-            : 'text-slate-400 hover:text-slate-600'
-          }`}
-          title="System Default"
-        >
-          <Monitor size={16} />
         </button>
 
         {/* Dark Mode */}
