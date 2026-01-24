@@ -1,5 +1,6 @@
 import React from 'react';
 import { Database, Cpu, Globe, Terminal, Code2, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 const categories = [
   {
@@ -113,9 +114,11 @@ export default function TechStack() {
           </div>
         </div>
 
+        <Link href={"/contact"} >
         <button className="relative z-10 w-full md:w-auto bg-white text-slate-900 px-10 py-4 rounded-xl font-black text-xs uppercase tracking-[0.2em] hover:bg-[#137fec] hover:text-white transition-all shadow-2xl flex items-center justify-center gap-2">
          Get in Touch <ArrowRight size={16} strokeWidth={3} />
         </button>
+        </Link>
       </div>
     </section>
   );

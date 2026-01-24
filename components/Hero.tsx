@@ -43,7 +43,7 @@ export default function Hero() {
 
             <div className="flex flex-wrap gap-5">
               <button className="group h-16 px-10 bg-[#137fec] text-white font-bold rounded-2xl shadow-xl shadow-blue-500/20 hover:scale-[1.02] active:scale-95 transition-all flex items-center gap-3">
-                Start a Project <ArrowUpRight className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                View Projects <ArrowUpRight className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
               </button>
               <a href="#" className="size-16 border-2 border-slate-200 dark:border-white/10 flex items-center justify-center hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-2xl text-slate-600 dark:text-slate-400">
                 <Github size={24} />

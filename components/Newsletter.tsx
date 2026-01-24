@@ -41,7 +41,7 @@ export default function Newsletter() {
               type="submit"
               className="bg-white dark:bg-slate-100 text-slate-900 px-8 py-3 rounded-full font-black text-xs uppercase tracking-widest hover:bg-[#137fec] hover:text-white transition-all flex items-center gap-2"
             >
-              Sync <Send size={14} strokeWidth={3} />
+              Sbscribe <Send size={14} strokeWidth={3} />
             </button>
           </form>
 

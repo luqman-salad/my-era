@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Mail, ArrowUpRight, MessageSquare, Check } from 'lucide-react';
+import Link from 'next/link';
 
 export default function ContactCTA() {
   const [copied, setCopied] = useState(false);
@@ -39,6 +40,8 @@ export default function ContactCTA() {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           {/* Primary Button: Now Black/Gray Authority Colors */}
+          <Link 
+            href="/contact">
           <button 
             onClick={handleEmailClick}
             className="w-full sm:w-auto px-8 py-4 bg-slate-900 dark:bg-[#0d1117] text-white rounded-full font-bold flex items-center justify-center gap-2 hover:bg-black dark:hover:bg-black border border-slate-800 transition-all shadow-xl shadow-black/10 relative overflow-hidden"
@@ -49,29 +52,30 @@ export default function ContactCTA() {
               <>Drop an Email <Mail size={18} /></>
             )}
           </button>
+          </Link>
           
-          <a 
+          <Link 
             href="https://wa.me/252616984305" 
             target="_blank"
             rel="noopener noreferrer"
             className="w-full sm:w-auto px-8 py-4 bg-white dark:bg-slate-900/50 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-800 rounded-full font-bold flex items-center justify-center gap-2 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all"
           >
             Book a Call <MessageSquare size={18} />
-          </a>
+          </Link>
         </div>
 
         {/* Social Proof Link */}
-        <div className="mt-12 pt-12 border-t border-slate-100 dark:border-slate-800/50 flex flex-wrap justify-center gap-8 opacity-50 grayscale font-mono text-[11px] tracking-widest uppercase">
-          <a href="#" className="flex items-center gap-1 font-bold hover:opacity-100 transition-opacity">
+        {/* <div className="mt-12 pt-12 border-t border-slate-100 dark:border-slate-800/50 flex flex-wrap justify-center gap-8 opacity-50 grayscale font-mono text-[13px] tracking-widest uppercase">
+          <Link href="https://linkedin.com/in/luqmansalad" className="flex items-center gap-1 font-bold hover:opacity-100 transition-opacity">
             LinkedIn <ArrowUpRight size={14} />
-          </a>
-          <a href="#" className="flex items-center gap-1 font-bold hover:opacity-100 transition-opacity">
+          </Link>
+          <Link href="https://x.com/luqman-salad" className="flex items-center gap-1 font-bold hover:opacity-100 transition-opacity">
             X (Twitter) <ArrowUpRight size={14} />
-          </a>
-          <a href="#" className="flex items-center gap-1 font-bold hover:opacity-100 transition-opacity">
-            Read CV <ArrowUpRight size={14} />
-          </a>
-        </div>
+          </Link>
+          <Link href="https://facebook.com/luqmansalad" className="flex items-center gap-1 font-bold hover:opacity-100 transition-opacity">
+            Facebook <ArrowUpRight size={14} />
+          </Link>
+        </div> */}
 
       </div>
     </section>

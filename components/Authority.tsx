@@ -26,7 +26,7 @@ const steps = [
   }
 ];
 
-export default function Authority({ username = "your-github-username" }: { username?: string }) {
+export default function Authority({ username = "luqman-salad" }: { username?: string }) {
   const [lastActivity, setLastActivity] = useState({ commit: "Initializing...", repo: "" });
   const [mounted, setMounted] = useState(false);
 

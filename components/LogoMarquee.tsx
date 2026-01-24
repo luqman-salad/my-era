@@ -1,26 +1,34 @@
 "use client";
 
 import React from 'react';
+import { BiLogoPostgresql } from 'react-icons/bi';
+import { RiNextjsFill } from 'react-icons/ri';
 import { 
   SiJavascript, SiVuedotjs, SiAngular, SiOpenjdk, 
   SiPhp, SiSwift, SiRust, SiWordpress, 
-  SiLaravel, SiAmazonwebservices, SiReact, SiNodedotjs, SiPython 
+  SiLaravel, SiAmazonwebservices, SiReact, SiNodedotjs, SiPython, 
+  SiTypescript,
+  SiMongodb,
+  SiExpress,
+  SiTailwindcss
 } from 'react-icons/si';
 
 const techStack = [
   { name: "JavaScript", Icon: SiJavascript },
-  { name: "Vue.js", Icon: SiVuedotjs },
-  { name: "Angular", Icon: SiAngular },
-  { name: "Java", Icon: SiOpenjdk },
-  { name: "PHP", Icon: SiPhp },
-  { name: "Swift", Icon: SiSwift },
-  { name: "Rust", Icon: SiRust },
-  { name: "WordPress", Icon: SiWordpress },
-  { name: "Laravel", Icon: SiLaravel },
+  { name: "Python", Icon: SiPython },
+  { name: "TypeScript", Icon: SiTypescript },
+  { name: "React Native", Icon: SiReact },
+  { name: "PostgreSQL", Icon: BiLogoPostgresql  },
+  { name: "Mongodb", Icon: SiMongodb  },
+  { name: "Express.js", Icon: SiExpress },
+  { name: "Next.js", Icon: RiNextjsFill  },
+  { name: "Tailwind CSS", Icon: SiTailwindcss },
   { name: "AWS", Icon: SiAmazonwebservices },
   { name: "React", Icon: SiReact },
   { name: "Node.js", Icon: SiNodedotjs },
-  { name: "Python", Icon: SiPython },
+  
+  { name: "WordPress", Icon: SiWordpress },
+  
 ];
 
 export default function SocialProof() {
@@ -28,7 +36,7 @@ export default function SocialProof() {
     <section className="py-24 bg-white dark:bg-transparent overflow-hidden border-y border-slate-100 dark:border-white/5 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6 mb-16">
         <div className="flex flex-col items-center">
-          <div className="flex items-center gap-2 text-[10px] font-mono font-bold text-slate-400 dark:text-slate-500 uppercase tracking-[0.4em]">
+          <div className="flex items-center gap-2 text-[15px] font-mono font-bold text-slate-400 dark:text-slate-500 uppercase tracking-[0.4em]">
             <span className="size-1.5 rounded-full bg-primary animate-pulse" />
             Core Stack & Industry Standard Integration
           </div>
@@ -59,10 +67,10 @@ export default function SocialProof() {
       <div className="max-w-6xl mx-auto px-6 mt-24">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 border-t border-slate-100 dark:border-white/5 pt-16">
           {[
-            { label: "Successful Sprints", value: "140+" },
+            { label: "Successful Sprints", value: "40+" },
             { label: "System Uptime", value: "99.9%" },
             { label: "Client Satisfaction", value: "100%" },
-            { label: "Cloud Deployments", value: "50+" },
+            { label: "Cloud Deployments", value: "10+" },
           ].map((stat, i) => (
             <div key={i} className="flex flex-col gap-1">
               <span className="text-3xl font-display font-black text-slate-900 dark:text-white tracking-tighter transition-colors">

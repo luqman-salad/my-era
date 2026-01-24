@@ -1,7 +1,8 @@
 "use client";
 
 import React from 'react';
-import { Mail, Github, Linkedin, Terminal, ArrowUpRight } from 'lucide-react';
+import { Mail, Github, Linkedin, Terminal, ArrowUpRight, } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -23,15 +24,15 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-wrap gap-x-8 gap-y-4">
-            <a href="https://github.com" target="_blank" className="text-xs font-bold text-slate-500 hover:text-[#137fec] transition-colors flex items-center gap-1">
+            <Link href="https://github.com/luqman-salad" target="_blank" className="text-xs font-bold text-slate-500 hover:text-[#137fec] transition-colors flex items-center gap-1">
               GITHUB <ArrowUpRight size={12} />
-            </a>
-            <a href="https://linkedin.com" target="_blank" className="text-xs font-bold text-slate-500 hover:text-[#137fec] transition-colors flex items-center gap-1">
+            </Link>
+            <Link href="https://linkedin.com/in/luqmansalad" target="_blank" className="text-xs font-bold text-slate-500 hover:text-[#137fec] transition-colors flex items-center gap-1">
               LINKEDIN <ArrowUpRight size={12} />
-            </a>
-            <a href="mailto:luqmansalad00@gmail.com" className="text-xs font-bold text-slate-500 hover:text-[#137fec] transition-colors flex items-center gap-1">
-              EMAIL <ArrowUpRight size={12} />
-            </a>
+            </Link>
+            <Link href="https://facebook.com/luqmansalad00" target="_blank" className="text-xs font-bold text-slate-500 hover:text-[#137fec] transition-colors flex items-center gap-1">
+              Facebook <ArrowUpRight size={12} />
+            </Link>
           </div>
         </div>
 

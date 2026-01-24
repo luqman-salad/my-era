@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { Mail, MapPin, Github, Linkedin, Twitter, Youtube, Send } from 'lucide-react';
+import { Mail, MapPin, Github, Linkedin, Twitter, Youtube, Send, Facebook } from 'lucide-react';
 
 export default function ContactPage() {
   return (
@@ -27,7 +27,7 @@ export default function ContactPage() {
               </div>
               <div>
                 <p className="text-[10px] font-mono font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">Email Me</p>
-                <p className="text-base font-bold text-slate-900 dark:text-white tracking-tight">hello@devcreator.ai</p>
+                <p className="text-base font-bold text-slate-900 dark:text-white tracking-tight">luqmansalad00@gmail.com</p>
               </div>
             </div>
 
@@ -37,7 +37,7 @@ export default function ContactPage() {
               </div>
               <div>
                 <p className="text-[10px] font-mono font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">Based In</p>
-                <p className="text-base font-bold text-slate-900 dark:text-white tracking-tight">San Francisco, CA</p>
+                <p className="text-base font-bold text-slate-900 dark:text-white tracking-tight">Mogadishu, BN,</p>
               </div>
             </div>
           </div>
@@ -47,10 +47,10 @@ export default function ContactPage() {
             <p className="text-[10px] font-mono font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">Connect with me</p>
             <div className="flex gap-4">
               {[
-                { icon: <Github size={20} />, href: "#" },
-                { icon: <Linkedin size={20} />, href: "#" },
-                { icon: <Twitter size={20} />, href: "#" },
-                { icon: <Youtube size={20} />, href: "#" },
+                { icon: <Github size={20} />, href: "https://github.com/luqman-salad" },
+                { icon: <Linkedin size={20} />, href: "https://linkedin.com/in/luqmansalad" },
+                { icon: <Twitter size={20} />, href: "https://twitter.com/luqman_salad" },
+                { icon: <Facebook size={20} />, href: "https://facebook.com/luqmansalad00" },
               ].map((social, i) => (
                 <a key={i} href={social.href} className="size-10 rounded-full bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-white/5 flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-white hover:bg-slate-800 dark:hover:bg-slate-800 transition-all">
                   {social.icon}
