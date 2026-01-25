@@ -11,7 +11,7 @@ export async function POST(request: Request) {
       from: 'Portfolio <onboarding@resend.dev>', // Keep this as is for testing
       to: ['luqmansalad00@gmail.com'],      // CHANGE THIS TO YOUR EMAIL
       subject: `[SYSTEM_CONTACT] ${subject}`,
-      reply_to: email,
+      replyTo: email,
       html: `
         <div style="background: #050505; color: white; padding: 40px; font-family: monospace;">
           <h1 style="color: #137fec; border-bottom: 1px solid #333; padding-bottom: 10px;">MESSAGE_PAYLOAD</h1>
