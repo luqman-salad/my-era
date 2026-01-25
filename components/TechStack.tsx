@@ -1,4 +1,6 @@
-import React from 'react';
+"use client";
+
+import React, { useState, useEffect } from 'react';
 import { Database, Cpu, Globe, Terminal, Code2, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
@@ -50,6 +52,12 @@ const categories = [
 ];
 
 export default function TechStack() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <section className="py-24 max-w-7xl mx-auto px-6">
       <div className="flex flex-col items-center text-center mb-16 px-4">
@@ -85,11 +93,13 @@ export default function TechStack() {
                   key={tool.name}
                   className="flex items-center gap-3 p-2 rounded-xl border border-transparent hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-all group/tool"
                 >
-                  <img 
-                    src={`https://cdn.simpleicons.org/${tool.icon}/94a3b8`} 
-                    alt={tool.name}
-                    className="size-4 grayscale group-hover/tool:grayscale-0 group-hover/tool:brightness-125 transition-all"
-                  />
+                  {mounted && (
+                    <img 
+                      src={`https://cdn.simpleicons.org/${tool.icon}/94a3b8`} 
+                      alt={tool.name}
+                      className="size-4 grayscale group-hover/tool:grayscale-0 group-hover/tool:brightness-125 transition-all"
+                    />
+                  )}
                   <span className="text-xs font-mono font-bold text-slate-500 dark:text-slate-400 group-hover/tool:text-white transition-colors">
                     {tool.name}
                   </span>
@@ -114,10 +124,13 @@ export default function TechStack() {
           </div>
         </div>
 
-        <Link href={"/contact"} >
-        <button className="relative z-10 w-full md:w-auto bg-white text-slate-900 px-10 py-4 rounded-xl font-black text-xs uppercase tracking-[0.2em] hover:bg-[#137fec] hover:text-white transition-all shadow-2xl flex items-center justify-center gap-2">
-         Get in Touch <ArrowRight size={16} strokeWidth={3} />
-        </button>
+        {/* FIX: Styled Link directly, removed nested <button>, and added suppressHydrationWarning */}
+        <Link 
+          href="/contact" 
+          suppressHydrationWarning
+          className="relative z-10 w-full md:w-auto bg-white text-slate-900 px-10 py-4 rounded-xl font-black text-xs uppercase tracking-[0.2em] hover:bg-[#137fec] hover:text-white transition-all shadow-2xl flex items-center justify-center gap-2"
+        >
+          Get in Touch <ArrowRight size={16} strokeWidth={3} />
         </Link>
       </div>
     </section>

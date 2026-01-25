@@ -1,12 +1,18 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect } from 'react'; // Added hooks
 import { Send, Terminal } from 'lucide-react';
 
 export default function Newsletter() {
+  const [mounted, setMounted] = useState(false);
+
+  // Ensure component is mounted to prevent hydration mismatches on dynamic attributes
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <section className="py-20 px-4 transition-colors duration-300">
-      {/* Container: Authority Dark/Black with Slate border */}
       <div className="relative mx-auto overflow-hidden rounded-3xl bg-slate-900 dark:bg-[#0d1117] p-8 md:p-16 border border-slate-200 dark:border-slate-800 shadow-2xl">
         
         {/* Subtle Terminal Glow in Background */}
@@ -32,16 +38,18 @@ export default function Newsletter() {
             onSubmit={(e) => e.preventDefault()}
           >
             <input 
+              suppressHydrationWarning // Prevents errors from autofill attributes
               type="email" 
               placeholder="operator@system.dev" 
               className="flex-1 bg-transparent border-none px-6 py-3 text-white placeholder:text-slate-600 font-mono text-sm outline-none w-full"
               required
             />
             <button 
+              suppressHydrationWarning // Prevents errors from button-state injections
               type="submit"
               className="bg-white dark:bg-slate-100 text-slate-900 px-8 py-3 rounded-full font-black text-xs uppercase tracking-widest hover:bg-[#137fec] hover:text-white transition-all flex items-center gap-2"
             >
-              Sbscribe <Send size={14} strokeWidth={3} />
+              Subscribe <Send size={14} strokeWidth={3} />
             </button>
           </form>
 
@@ -50,7 +58,7 @@ export default function Newsletter() {
         {/* Bottom Status Bar - Authority Style */}
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-4 opacity-30">
            <div className="flex items-center gap-1.5 text-[8px] font-mono text-emerald-500">
-             <div className="size-1 rounded-full bg-emerald-500 animate-pulse" /> ENCRYPTED CONNECTION
+             <div className={`size-1 rounded-full bg-emerald-500 ${mounted ? 'animate-pulse' : ''}`} /> ENCRYPTED CONNECTION
            </div>
         </div>
       </div>

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Sparkles, Calendar, ArrowRight, FileQuestion } from 'lucide-react';
+import { Sparkles, Calendar, ArrowRight, FileQuestion, Clock } from 'lucide-react';
 import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
 
@@ -19,12 +19,16 @@ export default function ContentPage() {
         title,
         "slug": slug.current
       }`;
+      
+      // Included readTime and isFeatured for UI consistency
       const postQuery = `*[_type == "blog"] | order(date desc) {
         _id,
         title,
         "slug": slug.current,
         "description": excerpt,
         date,
+        readTime,
+        isFeatured,
         "category": category->title, 
         image
       }`;
@@ -97,7 +101,7 @@ export default function ContentPage() {
                 <Link href={`/content/${article.slug}`} className="absolute inset-0 z-10" aria-label={article.title} />
 
                 {/* Thumbnail */}
-                <div className="md:col-span-2 overflow-hidden rounded-3xl aspect-[16/9] border border-slate-100 dark:border-slate-800">
+                <div className="md:col-span-2 overflow-hidden rounded-3xl aspect-[16/9] border border-slate-100 dark:border-slate-800 bg-slate-100 dark:bg-slate-900">
                   {article.image && (
                      <img 
                       src={urlFor(article.image).width(1000).url()} 
@@ -110,10 +114,15 @@ export default function ContentPage() {
                 {/* Text Content */}
                 <div className="md:col-span-3">
                   <div className="flex items-center gap-3 text-[10px] font-mono font-bold uppercase tracking-widest text-[#137fec] mb-4">
-                    <span className="bg-[#137fec]/10 px-2 py-1 rounded-md">{article.category}</span>
+                    <span className="bg-[#137fec]/10 px-2 py-1 rounded-md">{article.category || "General"}</span>
                     <span className="text-slate-400 flex items-center gap-1">
                       <Calendar size={12} /> {new Date(article.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                     </span>
+                    {article.readTime && (
+                      <span className="text-slate-400 flex items-center gap-1">
+                        <Clock size={12} /> {article.readTime}
+                      </span>
+                    )}
                   </div>
 
                   <h2 className="text-3xl font-bold text-slate-900 dark:text-white group-hover:text-[#137fec] transition-colors mb-4">
@@ -132,19 +141,21 @@ export default function ContentPage() {
             ))
           ) : (
             /* --- EMPTY STATE FEEDBACK --- */
-            <div className="py-24 flex flex-col items-center justify-center border-2 border-dashed border-slate-100 dark:border-slate-900 rounded-[3rem] text-center">
-              <div className="size-16 bg-slate-50 dark:bg-slate-900 flex items-center justify-center rounded-2xl mb-6">
+            <div className="py-24 flex flex-col items-center justify-center border-2 border-dashed border-slate-100 dark:border-slate-900 rounded-[3rem] text-center bg-slate-50/30 dark:bg-transparent">
+              <div className="size-16 bg-white dark:bg-slate-900 flex items-center justify-center rounded-2xl mb-6 shadow-sm border border-slate-100 dark:border-slate-800">
                 <FileQuestion className="text-slate-300 dark:text-slate-600" size={32} />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white uppercase tracking-tight">No Entries in {activeCategory}</h3>
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white uppercase tracking-tight">
+                No Entries in {activeCategory}
+              </h3>
               <p className="text-slate-500 font-mono text-xs uppercase tracking-widest mt-2">
                 The archives for this segment are currently empty.
               </p>
               <button 
                 onClick={() => setActiveCategory("All")}
-                className="mt-6 text-[#137fec] text-[10px] font-black uppercase tracking-[0.3em] hover:opacity-70 transition-opacity"
+                className="mt-8 px-6 py-2 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-[10px] font-black uppercase tracking-[0.2em] hover:scale-105 transition-transform active:scale-95"
               >
-                Return_to_Main
+                Reset_Database_View
               </button>
             </div>
           )}

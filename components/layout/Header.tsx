@@ -10,7 +10,6 @@ export default function Header() {
   const [mounted, setMounted] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Prevent hydration mismatch
   useEffect(() => setMounted(true), []);
 
   const navLinks = [
@@ -27,10 +26,7 @@ export default function Header() {
         {/* Left Side: Brand/Logo */}
         <Link href="/" className="flex items-center gap-3 group z-50">
           <div className="bg-[#137fec] p-2 rounded-xl text-white shadow-lg shadow-[#137fec]/30 group-hover:rotate-6 transition-transform">
-            <Terminal 
-                strokeWidth={2.5} 
-                className="w-5 h-5 md:w-6 md:h-6" 
-            />
+            <Terminal strokeWidth={2.5} className="w-5 h-5 md:w-6 md:h-6" />
           </div>
           <h2 className="text-lg md:text-xl font-black tracking-tighter text-slate-900 dark:text-white uppercase">
             LUQMAN.DEV
@@ -52,8 +48,9 @@ export default function Header() {
 
         {/* Right Side: Actions */}
         <div className="flex items-center gap-2 sm:gap-4">
-          {/* Theme Toggle */}
+          {/* Theme Toggle - Added suppressHydrationWarning */}
           <button
+            suppressHydrationWarning
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
             className="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors h-10 w-10 flex items-center justify-center"
           >
@@ -68,18 +65,18 @@ export default function Header() {
 
           <div className="h-6 w-px bg-slate-200 dark:bg-slate-800 mx-1 hidden md:block" />
 
-          {/* Let's Talk Button */}
-          <Link href="/contact" className="hidden sm:flex">
-            <button 
-              className="bg-[#137fec] hover:bg-[#137fec]/90 text-white px-5 py-2.5 rounded-full text-xs font-black uppercase tracking-widest transition-all shadow-lg shadow-[#137fec]/20 flex items-center gap-2"
-            >
-              Let's Talk
-              <ArrowRight size={14} />
-            </button>
+          {/* FIX: Removed nested <button>, styled the <Link> directly */}
+          <Link 
+            href="/contact" 
+            className="hidden sm:flex bg-[#137fec] hover:bg-[#137fec]/90 text-white px-5 py-2.5 rounded-full text-xs font-black uppercase tracking-widest transition-all shadow-lg shadow-[#137fec]/20 items-center gap-2"
+          >
+            Let's Talk
+            <ArrowRight size={14} />
           </Link>
 
           {/* Mobile Menu Toggle */}
           <button 
+            suppressHydrationWarning
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="lg:hidden p-2 text-slate-900 dark:text-white z-50"
           >
@@ -103,11 +100,15 @@ export default function Header() {
               </Link>
             ))}
             <div className="h-px bg-slate-100 dark:bg-slate-800 my-2" />
-            <button 
+            
+            {/* FIX: Changed button to Link for mobile as well */}
+            <Link 
+              href="/contact"
+              onClick={() => setIsMenuOpen(false)}
               className="w-full bg-[#137fec] text-white p-4 rounded-xl font-black uppercase tracking-widest text-xs flex items-center justify-center gap-2"
             >
               Get in Touch <ArrowRight size={16} />
-            </button>
+            </Link>
           </nav>
         </div>
       )}

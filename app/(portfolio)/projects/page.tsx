@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { ArrowUpRight, Folder, Github, SearchX } from 'lucide-react'; // Added SearchX for empty state
+import { ArrowUpRight, Folder, Github, SearchX, Star } from 'lucide-react';
 import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
 
@@ -14,10 +14,17 @@ export default function ProjectsPage() {
   useEffect(() => {
     async function fetchData() {
       const categoryQuery = `*[_type == "category" && type == "project"] { _id, title }`;
-      const projectQuery = `*[_type == "project"] | order(_createdAt desc) {
+      
+      // UPDATED QUERY: 
+      // 1. Featured first
+      // 2. orderId 1, 2, 3... (asc)
+      // 3. Newest fallback
+      const projectQuery = `*[_type == "project"] | order(isFeatured desc, orderId asc, _createdAt desc) {
         _id,
         title,
         description,
+        orderId,
+        isFeatured,
         "category": category->title, 
         image,
         tags,
@@ -89,7 +96,7 @@ export default function ProjectsPage() {
           ))}
         </div>
 
-        {/* Projects Grid with Empty State Feedback */}
+        {/* Projects Grid */}
         {filteredProjects.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredProjects.map((project: any) => (
@@ -98,13 +105,19 @@ export default function ProjectsPage() {
                 className="group relative bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden hover:border-[#137fec] transition-all duration-500"
               >
                 {/* Image Container */}
-                <div className="aspect-[16/10] overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
+                <div className="aspect-[16/10] overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700 relative">
                   {project.image && (
                     <img 
                       src={urlFor(project.image).width(1200).url()} 
                       alt={project.title} 
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
+                  )}
+                  {/* Featured Star Badge */}
+                  {project.isFeatured && (
+                    <div className="absolute top-4 right-4 bg-[#137fec] p-2 rounded-xl shadow-xl">
+                      <Star size={14} className="text-white fill-white" />
+                    </div>
                   )}
                 </div>
 
@@ -115,9 +128,16 @@ export default function ProjectsPage() {
                       <div className="p-3 w-fit bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
                         <Folder className="text-[#137fec]" size={20} />
                       </div>
-                      <span className="text-[10px] font-black text-[#137fec] uppercase tracking-tighter mt-2">
-                        {project.category}
-                      </span>
+                      <div className="flex items-center gap-2 mt-2">
+                        <span className="text-[10px] font-black text-[#137fec] uppercase tracking-tighter">
+                          {project.category}
+                        </span>
+                        {project.orderId && (
+                           <span className="text-[9px] font-mono text-slate-400 dark:text-slate-600">
+                             SYS_0{project.orderId}
+                           </span>
+                        )}
+                      </div>
                     </div>
                     
                     <div className="flex gap-3">
@@ -153,7 +173,7 @@ export default function ProjectsPage() {
             ))}
           </div>
         ) : (
-          /* --- FEEDBACK SECTION FOR NO DATA --- */
+          /* Empty State */
           <div className="flex flex-col items-center justify-center py-32 px-6 border-2 border-dashed border-slate-100 dark:border-slate-900 rounded-[3rem]">
             <div className="p-6 rounded-full bg-slate-50 dark:bg-slate-900/50 mb-6">
               <SearchX className="text-slate-300 dark:text-slate-700" size={48} />

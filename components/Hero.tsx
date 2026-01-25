@@ -1,13 +1,16 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link'; // Added Link import
 import { Code2, Command, Github, Cpu, Globe, Zap, ArrowUpRight, ShieldCheck, Activity } from 'lucide-react';
 
 export default function Hero() {
   const [activeTab, setActiveTab] = useState(0);
   const [loading, setLoading] = useState(0);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const interval = setInterval(() => {
       setLoading(prev => (prev >= 100 ? 100 : prev + 2));
     }, 30);
@@ -17,8 +20,6 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center py-24 overflow-hidden bg-white dark:bg-[#050505] transition-colors duration-500">
       
-      {/* Pattern background removed as requested */}
-
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid lg:grid-cols-12 gap-20 items-center">
           
@@ -42,10 +43,21 @@ export default function Hero() {
             </div>
 
             <div className="flex flex-wrap gap-5">
-              <button className="group h-16 px-10 bg-[#137fec] text-white font-bold rounded-2xl shadow-xl shadow-blue-500/20 hover:scale-[1.02] active:scale-95 transition-all flex items-center gap-3">
+              {/* FIX: Changed from button to Link to prevent nesting issues and added suppression */}
+              <Link 
+                href="/projects"
+                suppressHydrationWarning
+                className="group h-16 px-10 bg-[#137fec] text-white font-bold rounded-2xl shadow-xl shadow-blue-500/20 hover:scale-[1.02] active:scale-95 transition-all flex items-center gap-3"
+              >
                 View Projects <ArrowUpRight className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-              </button>
-              <a href="#" className="size-16 border-2 border-slate-200 dark:border-white/10 flex items-center justify-center hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-2xl text-slate-600 dark:text-slate-400">
+              </Link>
+              
+              <a 
+                href="https://github.com" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="size-16 border-2 border-slate-200 dark:border-white/10 flex items-center justify-center hover:bg-slate-50 dark:hover:bg-white/5 transition-all rounded-2xl text-slate-600 dark:text-slate-400"
+              >
                 <Github size={24} />
               </a>
             </div>
@@ -54,14 +66,12 @@ export default function Hero() {
           {/* RIGHT: SYSTEM CORE */}
           <div className="lg:col-span-7 relative">
             <div className="relative z-20 bg-slate-50 dark:bg-[#0d1117] rounded-[2.5rem] border border-slate-200 dark:border-white/10 shadow-2xl p-2">
-              
-              {/* Inner Shell */}
               <div className="bg-white dark:bg-black/20 rounded-[2rem] overflow-hidden border border-slate-100 dark:border-white/5">
                 
                 {/* Header: Identity Bar */}
                 <div className="p-6 border-b border-slate-100 dark:border-white/5 flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    <div className="size-12 rounded-full border-2 border-[#137fec] p-0.5">
+                    <div className="size-12 rounded-full border-2 border-[#137fec] p-0.5 overflow-hidden">
                       <img src="/luqman.jpg" className="w-full h-full object-cover rounded-full grayscale" alt="Engineer" />
                     </div>
                     <div>
@@ -87,6 +97,7 @@ export default function Hero() {
                     ].map((item, i) => (
                       <button 
                         key={i} 
+                        suppressHydrationWarning // Added to stop extension interference
                         onClick={() => setActiveTab(i)}
                         className={`w-full flex flex-col items-center gap-1 p-3 rounded-xl transition-all ${activeTab === i ? 'bg-slate-50 dark:bg-white/5 shadow-inner text-[#137fec]' : 'text-slate-400 hover:text-slate-600 dark:hover:text-slate-200'}`}
                       >
@@ -104,7 +115,9 @@ export default function Hero() {
                         <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter">Optimization</h2>
                       </div>
                       <div className="text-right">
-                        <span className="text-4xl font-black text-[#137fec]">{loading}%</span>
+                        <span className="text-4xl font-black text-[#137fec]">
+                          {mounted ? loading : 0}% 
+                        </span>
                         <p className="text-[9px] font-mono text-slate-400">STABLE_LATENCY</p>
                       </div>
                     </div>
@@ -135,13 +148,16 @@ export default function Hero() {
                     {/* Scanning Visualizer */}
                     <div className="mt-6 h-20 w-full bg-slate-50 dark:bg-white/5 rounded-xl overflow-hidden relative border border-slate-100 dark:border-white/5">
                        <div className="absolute inset-0 flex items-center justify-around px-4">
-                          {[30, 60, 40, 80, 50, 90, 70, 40, 60, 30].map((h, i) => (
-                            <div 
-                              key={i} 
-                              className="w-2 bg-[#137fec] rounded-full transition-all duration-500"
-                              style={{ height: `${(h * loading) / 100}%`, opacity: (i + 1) / 10 }}
-                            />
-                          ))}
+                         {[30, 60, 40, 80, 50, 90, 70, 40, 60, 30].map((h, i) => (
+                           <div 
+                             key={i} 
+                             className="w-2 bg-[#137fec] rounded-full transition-all duration-500"
+                             style={{ 
+                               height: mounted ? `${(h * loading) / 100}%` : '0%', 
+                               opacity: (i + 1) / 10 
+                             }}
+                           />
+                         ))}
                        </div>
                     </div>
                   </div>
