@@ -12,7 +12,7 @@ import ContactCTA from '@/components/ContactCTA';
 export default function Page() {
   return (
     <div className="min-h-screen bg-white dark:bg-[#050505] transition-colors duration-300">
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="max-w-5xl mx-auto px-6">
         <Hero />
         <LogoMarquee />
         <TechStack />
