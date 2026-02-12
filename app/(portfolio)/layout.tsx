@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Luqman | High-Fidelity Engineer",
+  title: "Luqman | Software Engineer",
   description: "Specialized in AI-driven systems and production-ready applications.",
 };
 
